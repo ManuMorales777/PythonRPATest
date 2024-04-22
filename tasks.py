@@ -45,12 +45,13 @@ class FoxNewsSearch:
         options.add_argument("--disable-dev-shm-usage")  
         options.add_argument("--headless") 
         options.add_argument("--remote-debugging-port=9222")
-        
+
         self.driver = webdriver.Chrome(options=options)
         self.wait = WebDriverWait(self.driver, 10)
     
     def click(self, xpath):
-        self.wait.until(EC.presence_of_element_located((By.XPATH, xpath))).click()
+        time.sleep(2)
+        self.driver.find_element(By.XPATH, xpath).click()
     def findbyXPath(self, xpath):
         self.driver.find_element(By.XPATH, xpath)
     def search(self, keyword):
