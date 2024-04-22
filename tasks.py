@@ -50,7 +50,7 @@ class FoxNewsSearch:
         self.wait = WebDriverWait(self.driver, 10)
     
     def click(self, xpath):
-        time.sleep(2)
+        time.sleep(3)
         self.driver.find_element(By.XPATH, xpath).click()
     def findbyXPath(self, xpath):
         self.driver.find_element(By.XPATH, xpath)
