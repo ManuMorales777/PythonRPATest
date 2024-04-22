@@ -2,6 +2,7 @@ import os
 from datetime import datetime, timedelta
 from openpyxl import Workbook
 from robocorp.tasks import task
+from robocorp import workitems
 from RPA.Robocorp.WorkItems import WorkItems
 import time
 import re
@@ -89,14 +90,14 @@ class FoxNewsSearch:
     
 @task
 def minimal_task():
-    work_items = WorkItems()
-    item = work_items.inputs.current
+    item = workitems.inputs.current
     print("Received payload:", item.payload)
     payload_actual = item.payload
     dateparameter = payload_actual.get('Month', '0')
     phraseToSearch = payload_actual.get('Phrase', 'Economy in LatinAmerica')
     actualdate = datetime.now()
-    dateparameter = 0
+    #dateparameter = 0
+    #phraseToSearch = "Economy in LatinAmerica"
     if dateparameter < 0:
         print("Error.")
         return
