@@ -2,6 +2,7 @@ import os
 from datetime import datetime, timedelta
 from openpyxl import Workbook
 from robocorp.tasks import task
+from RPA.Robocorp.WorkItems import WorkItems
 import time
 import re
 import requests
@@ -88,6 +89,11 @@ class FoxNewsSearch:
     
 @task
 def minimal_task():
+    work_items = WorkItems()
+    work_items.load_input_work_item()
+    payload_actual = work_items.get_payload()
+    dateparameter = payload_actual.get('Month', '0')
+    phraseToSearch = payload_actual.get('Phrase', 'Economy in LatinAmerica')
     actualdate = datetime.now()
     dateparameter = 0
     if dateparameter < 0:
@@ -102,7 +108,6 @@ def minimal_task():
     currentyear = int(actualDate.strftime("%Y"))
     yearIndex = (currentyear - pastyear) + 1
     print("Starting the automation")
-    phraseToSearch = "Economy in LatinAmerica"
     bot = FoxNewsSearch()
     bot.search(phraseToSearch)
     time.sleep(3)
