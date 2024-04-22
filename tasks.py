@@ -45,7 +45,7 @@ class FoxNewsSearch:
         options.add_argument("--disable-dev-shm-usage")  
         options.add_argument("--headless") 
         options.add_argument("--remote-debugging-port=9222")
-        self.driver = webdriver.Chrome(chrome_options=options)
+        self.driver = webdriver.Edge()
         self.driver.get("https://www.foxnews.com/")
         self.wait = WebDriverWait(self.driver, 10)
     
