@@ -90,8 +90,9 @@ class FoxNewsSearch:
 @task
 def minimal_task():
     work_items = WorkItems()
-    work_items.load_input_work_item()
-    payload_actual = work_items.get_payload()
+    item = work_items.inputs.current
+    print("Received payload:", item.payload)
+    payload_actual = item.payload
     dateparameter = payload_actual.get('Month', '0')
     phraseToSearch = payload_actual.get('Phrase', 'Economy in LatinAmerica')
     actualdate = datetime.now()
