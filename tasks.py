@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from openpyxl import Workbook
 from robocorp.tasks import task
 from robocorp import workitems
+from selenium.webdriver.chrome.options import Options
 from RPA.Robocorp.WorkItems import WorkItems
 import time
 import re
@@ -39,7 +40,12 @@ class ExcelCreator:
         self.workbook.save(filename=output_path)
 class FoxNewsSearch:
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        options = Options()
+        options.add_argument("--no-sandbox")  
+        options.add_argument("--disable-dev-shm-usage")  
+        options.add_argument("--headless") 
+        options.add_argument("--remote-debugging-port=9222")
+        self.driver = webdriver.Chrome(chrome_options=options)
         self.driver.get("https://www.foxnews.com/")
         self.wait = WebDriverWait(self.driver, 10)
     
