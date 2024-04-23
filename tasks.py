@@ -156,7 +156,7 @@ def minimal_task():
     time.sleep(3)
     print("Entering the loop")
     while not(page.is_hidden("//*[@id='wrapper']/div[2]/div[2]/div/div[3]/div[2]")):
-        page.click("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[2]//a")
+        page.click("//*[@id='wrapper']/div[2]/div[2]/div/div[3]/div[2]")
         time.sleep(3)
     print("Exit loading news")
     time.sleep(3)
