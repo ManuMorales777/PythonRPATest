@@ -37,7 +37,7 @@ class ExcelCreator:
         self.sheet.append(data)
 
     def save_file(self):
-        output_dir = Path(os.environ.get('ROpage_ARTIFACTS'))
+        output_dir = Path(os.environ.get('ROBOT_ARTIFACTS'))
         #output_dir = "C:/Users/manue/PycharmProjects/RPA_Challenge/output/"
         output_path = os.path.join(output_dir, self.filename)
         self.workbook.save(filename=output_path)
