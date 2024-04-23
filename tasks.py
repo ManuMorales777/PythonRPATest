@@ -134,41 +134,40 @@ def minimal_task():
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[1]//button")
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[1]//ul//li["+str(pastmonth)+"]")
     #Day_From
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button")
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/ul/li["+str(1)+"]")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[2]//button")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[2]//ul//li["+str(1)+"]")
     #Year_From
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button")
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/ul/li[1]")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[3]//button")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[3]//ul//li[1]")
     #Month_To
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/button")
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/ul/li["+str(currentmonth)+"]")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[2]//div[1]//button")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[2]//div[1]//ul//li["+str(currentmonth)+"]")
     #Day_To
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/button")
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/ul/li["+str(currentday)+"]")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[2]//div[2]//button")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[2]//div[2]//ul//li["+str(currentday)+"]")
     #Year_From
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/button")
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/ul/li["+str(yearIndex)+"]")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[2]//div[3]//button")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[2]//div[3]//ul//li["+str(yearIndex)+"]")
     #SearchButton
-    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[1]/div[2]/div/a")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[1]//div[2]//div//a")
     time.sleep(3)
     while True:
      try:
-         page.findbyXPath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[2]/a")
-         page.click("/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[2]/a")
+         page.click("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[2]//a")
          time.sleep(1)
      except ElementNotInteractableException:
         break
     print("Exit loading news")
     time.sleep(3)
     print("Start reading all news")
-    newsAmount = int(page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[1]/div/div[1]/div[1]/span[1]").text)
+    
+    newsAmount = int(page.inner_text("//html//body//div[1]//div//div//div[2]//div[1]//div//div[1]//div[1]//span[1]"))
     print("Amount of News: " + str(newsAmount))
     print("Creating Excel Table")
     # Create the Excel File
     excel_creator = ExcelCreator('data.xlsx')
     headers = ['Title', 'Date', 'Description', 'Picture Filename', 'Count of Search Phrases', 'True or False']
     excel_creator.create_headers(headers)
-
 
 
     for i in range(1, newsAmount):
