@@ -11,6 +11,7 @@ import requests
 import shutil
 from selenium import webdriver
 from selenium.common import ElementNotInteractableException
+from selenium.common.exceptions import ElementNotInteractableException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
@@ -129,7 +130,7 @@ def minimal_task():
     page.click("//*[@id='wrapper']/header/div[2]/div/div/div[2]/div[1]/a")
     page.fill("//*[@id='wrapper']/header/div[4]/div[1]/div/div/form/fieldset/input[1]",phraseToSearch)   
     page.click("//*[@id='wrapper']/header/div[4]/div[1]/div/div/form/fieldset/input[2]")
-    time.sleep(3)
+    time.sleep(5)
     #Month_From
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[1]//button")
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[1]//ul//li["+str(pastmonth)+"]")
@@ -139,6 +140,7 @@ def minimal_task():
     #Year_From
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[3]//button")
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[3]//ul//li[1]")
+    time.sleep(1)
     #Month_To
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[2]//div[1]//button")
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[2]//div[1]//ul//li["+str(currentmonth)+"]")
@@ -153,8 +155,9 @@ def minimal_task():
     time.sleep(3)
     while True:
      try:
+         page.wait_for_selector("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[2]//a")
          page.click("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[2]//a")
-         time.sleep(1)
+         time.sleep(2)
      except ElementNotInteractableException:
         break
     print("Exit loading news")
