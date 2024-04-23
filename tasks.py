@@ -104,10 +104,10 @@ def minimal_task():
     print("Received payload:", item.payload)
     payload_actual = item.payload
     dateparameter = payload_actual.get('Month', '0')
-    phraseToSearch = payload_actual.get('Phrase', 'Economy in LatinAmerica')
+    phraseToSearch = payload_actual.get('Phrase', 'Economy')
+    categoryToSearch = payload_actual.get('Category', 'LatinAmerica')
+    phrase_category_Search = f"{phraseToSearch} in {categoryToSearch}"
     actualdate = datetime.now()
-    #dateparameter = 0
-    #phraseToSearch = "Economy in LatinAmerica"
     if dateparameter < 0:
         print("Error.")
         return
@@ -129,7 +129,7 @@ def minimal_task():
     page = browser.goto(secrets['url'])
     time.sleep(3)
     page.click("//*[@id='wrapper']/header/div[2]/div/div/div[2]/div[1]/a")
-    page.fill("//*[@id='wrapper']/header/div[4]/div[1]/div/div/form/fieldset/input[1]",phraseToSearch)   
+    page.fill("//*[@id='wrapper']/header/div[4]/div[1]/div/div/form/fieldset/input[1]",phrase_category_Search)   
     page.click("//*[@id='wrapper']/header/div[4]/div[1]/div/div/form/fieldset/input[2]")
     time.sleep(5)
     #Month_From
@@ -159,9 +159,8 @@ def minimal_task():
         page.click("//*[@id='wrapper']/div[2]/div[2]/div/div[3]/div[2]")
         time.sleep(3)
     print("Exit loading news")
-    time.sleep(3)
+
     print("Start reading all news")
-    
     newsAmount = int(page.inner_text("//html//body//div[1]//div//div//div[2]//div[1]//div//div[1]//div[1]//span[1]"))
     print("Amount of News: " + str(newsAmount))
     print("Creating Excel Table")
@@ -169,8 +168,6 @@ def minimal_task():
     excel_creator = ExcelCreator('data.xlsx')
     headers = ['Title', 'Date', 'Description', 'Picture Filename', 'Count of Search Phrases', 'True or False']
     excel_creator.create_headers(headers)
-
-
     for i in range(1, newsAmount):
      elements = page.inner_text("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[1]//article["+str(i)+"]")
      #Get Picture Source
