@@ -177,9 +177,7 @@ def minimal_task():
     for i in range(1, newsAmount):
      elements = page.inner_text("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[1]//article["+str(i)+"]")
      #Get Picture Source
-     picture = page.inner_text("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[1]//article["+str(i)+"]//div[1]//a//picture//img")
-     pictureSRC = picture.__getattribute__("src")
-     
+     pictureSRC = page.get_attribute("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[1]//article["+str(i)+"]//div[1]//a//picture//img@src")
      #Get Date Text
      dateText = page.inner_text("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[1]//article["+str(i)+"]//div[2]//header//div//span[2]")
      #Get Title
