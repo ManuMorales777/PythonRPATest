@@ -153,6 +153,7 @@ def minimal_task():
     #SearchButton
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[1]//div[2]//div//a")
     time.sleep(3)
+    print("Entering the loop")
     while True:
      try:
          page.wait_for_selector("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[2]//a")
