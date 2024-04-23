@@ -65,7 +65,7 @@ class FoxNewsSearch:
         self.driver.find_element(By.XPATH, search_input_xpath).send_keys(Keys.ENTER)
 
     def download_image(image_url, filename):
-        output_dir = Path(os.environ.get('ROpage_ARTIFACTS'))
+        output_dir = Path(os.environ.get('ROBOT_ARTIFACTS'))
         output_path = os.path.join(output_dir, filename)
         response = requests.get(image_url, stream=True)
         if response.status_code == 200:
