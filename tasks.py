@@ -126,6 +126,7 @@ def minimal_task():
     secrets =  vault.get_secret('Rpa_Challenge')
     page = browser.goto(secrets['url'])
     page.click("/html/body/div[3]/header/div[2]/div/div/div[2]/div[1]/a")
+    
     page.fill("/html/body/div[3]/header/div[4]/div[1]/div/div/form/fieldset/input[1]").send_keys(send_enter = True)   
     time.sleep(3)
     #Month_From
