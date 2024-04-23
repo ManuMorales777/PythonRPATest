@@ -154,7 +154,13 @@ def minimal_task():
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[1]//div[2]//div//a")
     time.sleep(3)
     print("Entering the loop")
-    
+    #while True:
+     #try:
+         #page.wait_for_selector("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[2]//a")
+         #page.click("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[2]//a")
+         #time.sleep(2)
+     #except ElementNotInteractableException:
+        #break
     print("Exit loading news")
     time.sleep(3)
     print("Start reading all news")
@@ -169,29 +175,31 @@ def minimal_task():
 
 
     for i in range(1, newsAmount):
-     elements = page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]").text
+     elements = page.inner_text("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[1]//article["+str(i)+"]")
      #Get Picture Source
-     picture = page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[1]/a/picture/img")
-     pictureSRC = picture.get_attribute("src")
+     picture = page.inner_text("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[1]//article["+str(i)+"]//div[1]//a//picture//img")
+     pictureSRC = picture.__getattribute__("src")
+     
      #Get Date Text
-     dateText = page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[2]/header/div/span[2]").text
+     dateText = page.inner_text("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[1]//article["+str(i)+"]//div[2]//header//div//span[2]")
      #Get Title
-     titleText = page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[2]/header/h2/a").text
+     titleText = page.inner_text("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[1]//article["+str(i)+"]//div[2]//header//h2//a")
      # Get Description
-     descriptionText = page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[2]/div/p/a").text
+     descriptionText = page.inner_text("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[1]//article["+str(i)+"]//div[2]//div//p//a")
      #print(elements)
      print(pictureSRC)
      print(dateText)
      print(titleText)
      print(descriptionText)
-     TitleCounter = page.phrase_counter(titleText,phraseToSearch)
-     DescriptionCounter = page.phrase_counter(descriptionText, phraseToSearch)
+     
+     TitleCounter = FoxNewsSearch.phrase_counter(titleText,phraseToSearch)
+     DescriptionCounter = FoxNewsSearch.phrase_counter(descriptionText, phraseToSearch)
      phraseCounter = TitleCounter + DescriptionCounter
      print("Phrase Counter: "+str(phraseCounter))
-     print("Money in Title: "+str(page.contains_money(titleText+descriptionText)))
-     page.download_image(pictureSRC,"img_"+str(i)+".jpg")
+     print("Money in Title: "+str(FoxNewsSearch.contains_money(titleText+descriptionText)))
+     FoxNewsSearch.download_image(pictureSRC,"img_"+str(i)+".jpg")
      # Añadir una fila con los datos de ejemplo
-     data = [titleText, dateText, descriptionText, "img_"+str(i)+".jpg", phraseCounter, page.contains_money(titleText+descriptionText)]
+     data = [titleText, dateText, descriptionText, "img_"+str(i)+".jpg", phraseCounter, FoxNewsSearch.contains_money(titleText+descriptionText)]
      excel_creator.add_row(data)
      print("--------------------------------------------------------------------------------------------------------------------------------")
 
