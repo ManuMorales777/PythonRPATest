@@ -2,7 +2,7 @@ import os
 from datetime import datetime, timedelta
 from openpyxl import Workbook
 from robocorp.tasks import task
-from robocorp import workitems
+from robocorp import workitems, browser, vault
 from selenium.webdriver.chrome.options import Options
 from RPA.Robocorp.WorkItems import WorkItems
 import time
@@ -35,7 +35,8 @@ class ExcelCreator:
         self.sheet.append(data)
 
     def save_file(self):
-        output_dir = "C:/Users/manue/PycharmProjects/RPA_Challenge/output/"
+        output_dir = Path(os.environ.get('ROBOT_ARTIFACTS'))
+        #output_dir = "C:/Users/manue/PycharmProjects/RPA_Challenge/output/"
         output_path = os.path.join(output_dir, self.filename)
         self.workbook.save(filename=output_path)
 class FoxNewsSearch:
@@ -50,7 +51,7 @@ class FoxNewsSearch:
         self.wait = WebDriverWait(self.driver, 10)
     
     def click(self, xpath):
-        time.sleep(3)
+        time.sleep(2)
         self.driver.find_element(By.XPATH, xpath).click()
     def findbyXPath(self, xpath):
         self.driver.find_element(By.XPATH, xpath)
@@ -62,7 +63,7 @@ class FoxNewsSearch:
         self.driver.find_element(By.XPATH, search_input_xpath).send_keys(Keys.ENTER)
 
     def download_image(self, image_url, filename):
-        output_dir = "C:/Users/manue/PycharmProjects/RPA_Challenge/output/"
+        output_dir = Path(os.environ.get('ROBOT_ARTIFACTS'))
         output_path = os.path.join(output_dir, filename)
         response = requests.get(image_url, stream=True)
         if response.status_code == 200:
@@ -117,7 +118,14 @@ def minimal_task():
     currentyear = int(actualDate.strftime("%Y"))
     yearIndex = (currentyear - pastyear) + 1
     print("Starting the automation")
-    bot = FoxNewsSearch()
+    browser.configure(
+        browser_engine="chromium",
+        screenshot="only-on-failure",
+        headless=False,
+    )
+    secrets =  vault.get_secret('Rpa_Challenge')
+    page = browser.goto(secrets['url'])
+    bot = browser.page()
     bot.search(phraseToSearch)
     time.sleep(3)
     #Month_From
