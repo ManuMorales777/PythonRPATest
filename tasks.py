@@ -154,13 +154,7 @@ def minimal_task():
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[1]//div[2]//div//a")
     time.sleep(3)
     print("Entering the loop")
-    while True:
-     try:
-         page.wait_for_selector("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[2]//a")
-         page.click("//html//body//div[1]//div//div//div[2]//div[2]//div//div[3]//div[2]//a")
-         time.sleep(2)
-     except ElementNotInteractableException:
-        break
+    
     print("Exit loading news")
     time.sleep(3)
     print("Start reading all news")
