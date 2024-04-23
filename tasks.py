@@ -5,6 +5,7 @@ from robocorp.tasks import task
 from robocorp import workitems, browser, vault
 from selenium.webdriver.chrome.options import Options
 from RPA.Robocorp.WorkItems import WorkItems
+from pathlib import Path
 import time
 import re
 import requests
