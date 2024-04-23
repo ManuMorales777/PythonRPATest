@@ -127,7 +127,8 @@ def minimal_task():
     page = browser.goto(secrets['url'])
     time.sleep(3)
     page.click("//*[@id='wrapper']/header/div[2]/div/div/div[2]/div[1]/a")
-    page.fill("//*[@id='wrapper']/header/div[4]/div[1]/div/div/form/fieldset/input[1]",phraseToSearch).send_keys("",send_enter = True)   
+    page.fill("//*[@id='wrapper']/header/div[4]/div[1]/div/div/form/fieldset/input[1]",phraseToSearch)   
+    page.click("//*[@id='wrapper']/header/div[4]/div[1]/div/div/form/fieldset/input[2]")
     time.sleep(3)
     #Month_From
     page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[1]//button")
