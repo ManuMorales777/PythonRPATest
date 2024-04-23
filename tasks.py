@@ -63,7 +63,7 @@ class FoxNewsSearch:
         self.driver.find_element(By.XPATH, search_input_xpath).send_keys(keyword)
         self.driver.find_element(By.XPATH, search_input_xpath).send_keys(Keys.ENTER)
 
-    def download_image(self, image_url, filename):
+    def download_image(image_url, filename):
         output_dir = Path(os.environ.get('ROpage_ARTIFACTS'))
         output_path = os.path.join(output_dir, filename)
         response = requests.get(image_url, stream=True)
@@ -75,7 +75,7 @@ class FoxNewsSearch:
         else:
             print("Download error")
 
-    def phrase_counter(self,textGiven, phraseGiven):
+    def phrase_counter(textGiven, phraseGiven):
         text = textGiven.lower()
         phrase = phraseGiven.lower()
         text_words = text.split()
@@ -87,7 +87,7 @@ class FoxNewsSearch:
 
         return counter
 
-    def contains_money(self,textGiven):
+    def contains_money(textGiven):
         #Regular Expresion
         money_pattern = r'\$[\d,]+(?:\.\d+)?|\b\d+\s*(?:dollars|USD)\b'
         matches = re.findall(money_pattern, textGiven)
@@ -189,7 +189,6 @@ def minimal_task():
      print(dateText)
      print(titleText)
      print(descriptionText)
-     
      TitleCounter = FoxNewsSearch.phrase_counter(titleText,phraseToSearch)
      DescriptionCounter = FoxNewsSearch.phrase_counter(descriptionText, phraseToSearch)
      phraseCounter = TitleCounter + DescriptionCounter
