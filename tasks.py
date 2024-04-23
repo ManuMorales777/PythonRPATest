@@ -35,7 +35,7 @@ class ExcelCreator:
         self.sheet.append(data)
 
     def save_file(self):
-        output_dir = Path(os.environ.get('ROBOT_ARTIFACTS'))
+        output_dir = Path(os.environ.get('ROpage_ARTIFACTS'))
         #output_dir = "C:/Users/manue/PycharmProjects/RPA_Challenge/output/"
         output_path = os.path.join(output_dir, self.filename)
         self.workbook.save(filename=output_path)
@@ -63,7 +63,7 @@ class FoxNewsSearch:
         self.driver.find_element(By.XPATH, search_input_xpath).send_keys(Keys.ENTER)
 
     def download_image(self, image_url, filename):
-        output_dir = Path(os.environ.get('ROBOT_ARTIFACTS'))
+        output_dir = Path(os.environ.get('ROpage_ARTIFACTS'))
         output_path = os.path.join(output_dir, filename)
         response = requests.get(image_url, stream=True)
         if response.status_code == 200:
@@ -127,40 +127,40 @@ def minimal_task():
     page = browser.goto(secrets['url'])
     time.sleep(3)
     page.click("//*[@id='wrapper']/header/div[2]/div/div/div[2]/div[1]/a")
-    page.fill("/html/body/div[3]/header/div[4]/div[1]/div/div/form/fieldset/input[1]").send_keys(send_enter = True)   
+    page.fill("//*[@id='wrapper']/header/div[2]/div/div/div[2]/div[1]/a").send_keys("",send_enter = True)   
     time.sleep(3)
     #Month_From
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]/button")
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]/ul/li["+str(pastmonth)+"]")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[1]//button")
+    page.click("//html//body//div[1]//div//div//div[2]//div[1]//div//div[2]//div[3]//div[1]//div[1]//ul//li["+str(pastmonth)+"]")
     #Day_From
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button")
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/ul/li["+str(1)+"]")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/ul/li["+str(1)+"]")
     #Year_From
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button")
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/ul/li[1]")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/ul/li[1]")
     #Month_To
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/button")
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/ul/li["+str(currentmonth)+"]")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/button")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/ul/li["+str(currentmonth)+"]")
     #Day_To
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/button")
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/ul/li["+str(currentday)+"]")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/button")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/ul/li["+str(currentday)+"]")
     #Year_From
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/button")
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/ul/li["+str(yearIndex)+"]")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/button")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/ul/li["+str(yearIndex)+"]")
     #SearchButton
-    bot.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[1]/div[2]/div/a")
+    page.click("/html/body/div[1]/div/div/div[2]/div[1]/div/div[1]/div[2]/div/a")
     time.sleep(3)
     while True:
      try:
-         bot.findbyXPath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[2]/a")
-         bot.click("/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[2]/a")
+         page.findbyXPath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[2]/a")
+         page.click("/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[2]/a")
          time.sleep(1)
      except ElementNotInteractableException:
         break
     print("Exit loading news")
     time.sleep(3)
     print("Start reading all news")
-    newsAmount = int(bot.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[1]/div/div[1]/div[1]/span[1]").text)
+    newsAmount = int(page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[1]/div/div[1]/div[1]/span[1]").text)
     print("Amount of News: " + str(newsAmount))
     print("Creating Excel Table")
     # Create the Excel File
@@ -171,34 +171,34 @@ def minimal_task():
 
 
     for i in range(1, newsAmount):
-     elements = bot.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]").text
+     elements = page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]").text
      #Get Picture Source
-     picture = bot.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[1]/a/picture/img")
+     picture = page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[1]/a/picture/img")
      pictureSRC = picture.get_attribute("src")
      #Get Date Text
-     dateText = bot.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[2]/header/div/span[2]").text
+     dateText = page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[2]/header/div/span[2]").text
      #Get Title
-     titleText = bot.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[2]/header/h2/a").text
+     titleText = page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[2]/header/h2/a").text
      # Get Description
-     descriptionText = bot.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[2]/div/p/a").text
+     descriptionText = page.driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div[3]/div[1]/article["+str(i)+"]/div[2]/div/p/a").text
      #print(elements)
      print(pictureSRC)
      print(dateText)
      print(titleText)
      print(descriptionText)
-     TitleCounter = bot.phrase_counter(titleText,phraseToSearch)
-     DescriptionCounter = bot.phrase_counter(descriptionText, phraseToSearch)
+     TitleCounter = page.phrase_counter(titleText,phraseToSearch)
+     DescriptionCounter = page.phrase_counter(descriptionText, phraseToSearch)
      phraseCounter = TitleCounter + DescriptionCounter
      print("Phrase Counter: "+str(phraseCounter))
-     print("Money in Title: "+str(bot.contains_money(titleText+descriptionText)))
-     bot.download_image(pictureSRC,"img_"+str(i)+".jpg")
+     print("Money in Title: "+str(page.contains_money(titleText+descriptionText)))
+     page.download_image(pictureSRC,"img_"+str(i)+".jpg")
      # Añadir una fila con los datos de ejemplo
-     data = [titleText, dateText, descriptionText, "img_"+str(i)+".jpg", phraseCounter, bot.contains_money(titleText+descriptionText)]
+     data = [titleText, dateText, descriptionText, "img_"+str(i)+".jpg", phraseCounter, page.contains_money(titleText+descriptionText)]
      excel_creator.add_row(data)
      print("--------------------------------------------------------------------------------------------------------------------------------")
 
     print("End reading all news")
     # Save Excel File
     excel_creator.save_file()
-    bot.close()
+    page.close()
 
