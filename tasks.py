@@ -258,9 +258,8 @@ def minimal_task():
         excel_creator.add_row(data)
 
         logging.debug("Processed article: %s", title)
-        
-
-   logging.info("Completed processing all news articles.")
+    
+    logging.info("Completed processing all news articles.")
     
     # Save the Excel file
     excel_creator.save_file()
