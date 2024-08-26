@@ -63,34 +63,6 @@ class ExcelCreator:
 
 class FoxNewsSearch:
     """Class to handle web scraping and search operations on Fox News."""
-
-    def __init__(self):
-        logging.info("Initializing Selenium WebDriver.")
-        options = Options()
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--headless")
-        options.add_argument("--remote-debugging-port=9222")
-
-        self.driver = webdriver.Chrome(options=options)
-        self.wait = WebDriverWait(self.driver, 10)
-
-    def click(self, xpath):
-        """Click an element on the page using XPath with the rpa library."""
-        logging.debug("Clicking element with XPath: %s", xpath)
-        time.sleep(3)
-        self.driver.find_element(By.XPATH, xpath).click()
-
-    def search(self, keyword):
-        """Perform a search on Fox News. search the button by XPATH, then click the button then write the prhase to search
-         then enter to search"""
-        logging.info("Performing search for: %s", keyword)
-        button_xpath = "//div[@class='search-toggle tablet-desktop']/a[@class='js-focus-search']" #Search Button
-        search_input_xpath = "//input[@type='text' and (@aria-label='search foxnews.com' or @placeholder='Search foxnews.com') and @name='q']" #Search text input
-        self.click(button_xpath)
-        self.driver.find_element(By.XPATH, search_input_xpath).send_keys(keyword)
-        self.driver.find_element(By.XPATH, search_input_xpath).send_keys(Keys.ENTER)
-
     @staticmethod
     def download_image(image_url, filename):
         """Download an image from the specified URL. Review if exists using the status code from Url
@@ -177,7 +149,7 @@ def minimal_task():
     
     # Retrieve secrets for authentication
     secrets = vault.get_secret('Rpa_Challenge')
-    page = browser.goto(secrets['url'])
+    page = browser.get(secrets['url'])
     time.sleep(3)
 
     # Perform the search on the website
