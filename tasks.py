@@ -152,7 +152,7 @@ def minimal_task():
     #chrome_options.add_argument("--disable-dev-shm-usage")
     #chrome_options.add_argument("--remote-debugging-port=9222")
     #chrome_options.add_experimental_option("prefs", chrome_prefs)
-    browser = webdriver.Firefox()
+    browser = webdriver.Chrome(options=chrome_options)
 
     # Retrieve secrets for authentication
     secrets = vault.get_secret('Rpa_Challenge')
