@@ -168,28 +168,28 @@ def minimal_task():
     """
     logging.info("Selecting date range for the search.")
     date_min_element = browser.find_element(By.XPATH, "//div[@class='date min']")
-    browser.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]") 
-    browser.click(f"//li[@id='{past_month_formatted}' and @class='{past_month_formatted}' and .='{past_month_formatted}']")
-    browser.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button")
-    browser.click(date_min_element.find_element(By.XPATH, ".//div[@class='sub day']//ul[@name='select']//li[@id='01']"))
-    page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button")
-    page.click("//li[@id='2024']")
+    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]").click()
+    browser.find_element(f"//li[@id='{past_month_formatted}' and @class='{past_month_formatted}' and .='{past_month_formatted}']").click()
+    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button").click()
+    browser.find_element(date_min_element.find_element(By.XPATH, ".//div[@class='sub day']//ul[@name='select']//li[@id='01']")).click()
+    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button").click()
+    browser.find_element("//li[@id='2024']").click()
     time.sleep(1)
-    page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/button")
-    page.click(f"//li[@id='{current_month_formatted}' and @class='{current_month_formatted}' and .='{current_month_formatted}']")
-    page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/button")
-    page.click(f"//li[@id='{current_day_formatted}' and @class='{current_day_formatted}' and .='{current_day_formatted}']")
-    page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/button")
-    page.click(f"//li[@id='{year_index_formatted}' and @class='{year_index_formatted}' and .='{year_index_formatted}']")
+    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/button").click()
+    browser.find_element(f"//li[@id='{current_month_formatted}' and @class='{current_month_formatted}' and .='{current_month_formatted}']").click()
+    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/button").click()
+    browser.find_element(f"//li[@id='{current_day_formatted}' and @class='{current_day_formatted}' and .='{current_day_formatted}']").click()
+    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/button").click()
+    browser.find_element(f"//li[@id='{year_index_formatted}' and @class='{year_index_formatted}' and .='{year_index_formatted}']").click()
 
     # Start searching
     logging.info("Starting search.")
-    page.click("//div[@class='button']/a[text()='Search']")
+    browser.find_element("//div[@class='button']/a[text()='Search']").click()
     time.sleep(3)
     
     logging.info("Entering the loop to load more news.")
-    while not page.is_hidden("//span[text()='Load More']"):
-        page.click("//span[text()='Load More']")
+    while not browser.is_hidden("//span[text()='Load More']"):
+        browser.find_element("//span[text()='Load More']").click()
         time.sleep(3)
 
     logging.info("Finished loading news.")
@@ -208,7 +208,7 @@ def minimal_task():
     excel_creator.create_headers(headers)
     
     # Find all articles using XPath
-    articles = driver.find_elements(By.XPATH, "//article[@class='article']")
+    articles = browser.find_elements(By.XPATH, "//article[@class='article']")
 
     # Loop through each article
     for article in articles:
