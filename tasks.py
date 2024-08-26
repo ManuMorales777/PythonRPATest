@@ -149,14 +149,14 @@ def minimal_task():
     
     # Retrieve secrets for authentication
     secrets = vault.get_secret('Rpa_Challenge')
-    page = browser.get(secrets['url'])
+    browser.get(secrets['url'])
     time.sleep(3)
 
     # Perform the search on the website
     logging.info("Performing search on the website.")
-    page.click("//div[@class='search-toggle tablet-desktop']/a[@class='js-focus-search']")
-    page.fill("//input[@type='text' and (@aria-label='search foxnews.com' or @placeholder='Search foxnews.com') and @name='q']", phrase_category_search)
-    page.click("//input[@type='submit' and @aria-label='submit search' and @class='resp_site_submit']")
+    browser.click("//div[@class='search-toggle tablet-desktop']/a[@class='js-focus-search']")
+    browser.fill("//input[@type='text' and (@aria-label='search foxnews.com' or @placeholder='Search foxnews.com') and @name='q']", phrase_category_search)
+    browser.click("//input[@type='submit' and @aria-label='submit search' and @class='resp_site_submit']")
     time.sleep(5)
 
     """ Select Date Range (From and To)
@@ -164,10 +164,10 @@ def minimal_task():
     """
     logging.info("Selecting date range for the search.")
     date_min_element = browser.find_element(By.XPATH, "//div[@class='date min']")
-    page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]") 
-    page.click(f"//li[@id='{past_month_formatted}' and @class='{past_month_formatted}' and .='{past_month_formatted}']")
-    page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button")
-    page.click(date_min_element.find_element(By.XPATH, ".//div[@class='sub day']//ul[@name='select']//li[@id='01']"))
+    browser.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]") 
+    browser.click(f"//li[@id='{past_month_formatted}' and @class='{past_month_formatted}' and .='{past_month_formatted}']")
+    browser.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button")
+    browser.click(date_min_element.find_element(By.XPATH, ".//div[@class='sub day']//ul[@name='select']//li[@id='01']"))
     page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button")
     page.click("//li[@id='2024']")
     time.sleep(1)
