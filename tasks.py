@@ -186,10 +186,11 @@ def minimal_task():
     As we have similar selectors for Month/Day selector, we rather to use the full XPath selector for this case. 
     """
     logging.info("Selecting date range for the search.")
+    date_min_element = page.find_element(By.XPATH, "//div[@class='date min']")
     page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]") 
     page.click(f"//li[@id='{past_month_formatted}' and @class='{past_month_formatted}' and .='{past_month_formatted}']")
     page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button")
-    page.click("//li[@id='01']")
+    page.click(date_min_element.find_element(By.XPATH, ".//div[@class='sub day']//ul[@name='select']//li[@id='01']"))
     page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button")
     page.click("//li[@id='2024']")
     time.sleep(1)
