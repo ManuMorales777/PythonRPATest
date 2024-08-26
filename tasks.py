@@ -164,23 +164,24 @@ def minimal_task():
     time.sleep(5)
 
     """ Select Date Range (From and To)
-    As we have similar selectors for Month/Day selector, we rather to use the full XPath selector for this case. 
+    Clicks on each list and selects depending on dates, also values are converted to 00 string format
     """
     logging.info("Selecting date range for the search.")
     date_min_element = browser.find_element(By.XPATH, "//div[@class='date min']")
-    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]").click()
-    browser.find_element(By.XPATH,f"//li[@id='{past_month_formatted}' and @class='{past_month_formatted}' and .='{past_month_formatted}']").click()
-    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button").click()
-    browser.find_element(By.XPATH,date_min_element.find_element(By.XPATH, ".//div[@class='sub day']//ul[@name='select']//li[@id='01']")).click()
-    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button").click()
-    browser.find_element(By.XPATH,"//li[@id='2024']").click()
+    date_min_element.find_element(By.XPATH, ".//div[@class='sub month']").click()
+    date_min_element.find_element(By.XPATH, f".//div[@class='sub month']//ul[@name='select']//li[@id='{past_month_formatted}']").click()
+    date_min_element.find_element(By.XPATH, ".//div[@class='sub day']").click()
+    date_min_element.find_element(By.XPATH, ".//div[@class='sub day']//ul[@name='select']//li[@id='01']").click()
+    date_min_element.find_element(By.XPATH, ".//div[@class='sub year']").click()
+    date_min_element.find_element(By.XPATH, ".//div[@class='sub year']//ul[@name='select']//li[@id='2024']").click()
     time.sleep(1)
-    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/button").click()
-    browser.find_element(By.XPATH,f"//li[@id='{current_month_formatted}' and @class='{current_month_formatted}' and .='{current_month_formatted}']").click()
-    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/button").click()
-    browser.find_element(By.XPATH,f"//li[@id='{current_day_formatted}' and @class='{current_day_formatted}' and .='{current_day_formatted}']").click()
-    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/button").click()
-    browser.find_element(By.XPATH,f"//li[@id='{year_index_formatted}' and @class='{year_index_formatted}' and .='{year_index_formatted}']").click()
+    date_max_element = browser.find_element(By.XPATH, "//div[@class='date max']")
+    date_max_element.find_element(By.XPATH, ".//div[@class='sub month']").click()
+    date_max_element.find_element(By.XPATH, f".//div[@class='sub month']//ul[@name='select']//li[@id='{current_month_formatted}']").click()
+    date_max_element.find_element(By.XPATH, ".//div[@class='sub day']").click()
+    date_max_element.find_element(By.XPATH, f".//div[@class='sub day']//ul[@name='select']//li[@id='{current_day_formatted}']").click()
+    date_max_element.find_element(By.XPATH, ".//div[@class='sub year']").click()
+    date_max_element.find_element(By.XPATH, f".//div[@class='sub year']//ul[@name='select']//li[@id='{year_index_formatted}']").click()
 
     # Start searching
     logging.info("Starting search.")
