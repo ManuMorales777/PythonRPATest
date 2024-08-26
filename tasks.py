@@ -184,11 +184,19 @@ def minimal_task():
     logging.info("Starting search.")
     browser.find_element(By.XPATH,"//div[@class='button']/a[text()='Search']").click()
     time.sleep(3)
-    
+
+    #In this loop we collapse all the articles to retrieve all the info of all news within given days
     logging.info("Entering the loop to load more news.")
-    while not browser.find_element("//span[text()='Load More']").is_displayed():
-        browser.find_element(By.XPATH,"//span[text()='Load More']").click()
+    while True:
+        try:
+        load_more_button = browser.find_element(By.XPATH, "//span[text()='Load More']")
+        if not load_more_button.is_displayed():
+        break
+        load_more_button.click()
         time.sleep(3)
+        except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        break
 
     logging.info("Finished loading news.")
 
@@ -196,7 +204,7 @@ def minimal_task():
         As we need this is a dynamic value in the page, we rather to use the full Xpath to retrieve the value in the span
 
     """
-    news_amount = int(browser.inner_text("//div[@class='num-found']/span[2]/span"))
+    news_amount = int(browser.find_element("//div[@class='num-found']/span[2]/span").text())
     logging.info("Amount of news articles found: %d", news_amount)
 
     # Create Excel table
