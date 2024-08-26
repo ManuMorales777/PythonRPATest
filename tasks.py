@@ -144,7 +144,11 @@ def minimal_task():
     chrome_options.add_argument("--remote-debugging-port=9222")
     service = Service('/usr/bin/chromedriver')
     browser = webdriver.Chrome(service=service, options=chrome_options)
-    
+    browser.configure(
+        browser_engine="chromium",
+        screenshot="only-on-failure",
+        headless=False,
+    )
     # Retrieve secrets for authentication
     secrets = vault.get_secret('Rpa_Challenge')
     browser.get(secrets['url'])
