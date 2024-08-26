@@ -147,11 +147,11 @@ def minimal_task():
 # Inicializar Chrome con las preferencias configuradas
     logging.info("Configuring browser for automation.")
     chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--remote-debugging-port=9222")
-    chrome_options.add_experimental_option("prefs", chrome_prefs)
+    #chrome_options.add_argument("--headless")
+    #chrome_options.add_argument("--no-sandbox")
+    #chrome_options.add_argument("--disable-dev-shm-usage")
+    #chrome_options.add_argument("--remote-debugging-port=9222")
+    #chrome_options.add_experimental_option("prefs", chrome_prefs)
     browser = webdriver.Chrome(options=chrome_options)
 
     # Retrieve secrets for authentication
