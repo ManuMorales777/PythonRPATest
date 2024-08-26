@@ -224,7 +224,7 @@ def minimal_task():
     
     # Find all articles using XPath
     articles = browser.find_elements(By.XPATH, "//article[@class='article']")
-    int i=1
+    i=1
     # Loop through each article
     for article in articles:
 
