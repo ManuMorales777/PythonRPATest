@@ -134,11 +134,6 @@ def minimal_task():
     current_day_formatted =  f"0{current_day}" if current_day < 10 else str(current_day)
 
     # Init chrome
-    browser.configure(
-        browser_engine="chromium",
-        screenshot="only-on-failure",
-        headless=False,
-    )
     logging.info("Configuring browser for automation.")
     chrome_options = Options()
     chrome_options.add_argument("--headless")
