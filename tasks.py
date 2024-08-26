@@ -127,15 +127,18 @@ def minimal_task():
     start_date, actual_date = DateCalculator.calculate(actual_date, date_parameter)
     past_month, past_year = start_date.month, start_date.year
     current_month, current_day, current_year = actual_date.month, actual_date.day, actual_date.year
-    year_index = (current_year - past_year) + 1
 
     # Convert int variables to 00 String format
     past_month_formatted = f"0{past_month}" if past_month < 10 else str(past_month)
     current_month_formatted =  f"0{current_month}" if current_month < 10 else str(current_month)
     current_day_formatted =  f"0{current_day}" if current_day < 10 else str(current_day)
-    year_index_formatted =  f"0{year_index}" if year_index < 10 else str(year_index)
 
     # Init chrome
+    browser.configure(
+        browser_engine="chromium",
+        screenshot="only-on-failure",
+        headless=False,
+    )
     logging.info("Configuring browser for automation.")
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -144,11 +147,6 @@ def minimal_task():
     chrome_options.add_argument("--remote-debugging-port=9222")
     service = Service('/usr/bin/chromedriver')
     browser = webdriver.Chrome(service=service, options=chrome_options)
-    browser.configure(
-        browser_engine="chromium",
-        screenshot="only-on-failure",
-        headless=False,
-    )
     # Retrieve secrets for authentication
     secrets = vault.get_secret('Rpa_Challenge')
     browser.get(secrets['url'])
