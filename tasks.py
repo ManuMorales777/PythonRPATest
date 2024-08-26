@@ -155,9 +155,12 @@ def minimal_task():
     logging.info("Performing search on the website.")
     browser.find_element(By.XPATH, "//div[@class='search-toggle tablet-desktop']/a[@class='js-focus-search']").click()
     text_input = browser.find_element(By.XPATH,"//input[@type='text' and (@aria-label='search foxnews.com' or @placeholder='Search foxnews.com') and @name='q']") 
+
+    #Search the input phrase with his category
     ActionChains(driver)\
         .send_keys_to_element(text_input, phrase_category_search)\
         .perform()
+    
     browser.find_element(By.XPATH,"//input[@type='submit' and @aria-label='submit search' and @class='resp_site_submit']")
     time.sleep(5)
 
