@@ -186,7 +186,7 @@ def minimal_task():
     As we have similar selectors for Month/Day selector, we rather to use the full XPath selector for this case. 
     """
     logging.info("Selecting date range for the search.")
-    date_min_element = self.driver.find_element(By.XPATH, "//div[@class='date min']")
+    date_min_element = WebDriverWait(browser, 3).until(EC.presence_of_element_located((By.XPATH, "//div[@class='date min']")))
     page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]") 
     page.click(f"//li[@id='{past_month_formatted}' and @class='{past_month_formatted}' and .='{past_month_formatted}']")
     page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button")
