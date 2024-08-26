@@ -224,7 +224,7 @@ def minimal_task():
     
     # Find all articles using XPath
     articles = browser.find_elements(By.XPATH, "//article[@class='article']")
-
+    int i=1
     # Loop through each article
     for article in articles:
 
@@ -253,7 +253,9 @@ def minimal_task():
         # Add the extracted data to the Excel sheet
         data = [title, date, description, f"img_{i}.jpg", phrase_counter, contains_money]
         excel_creator.add_row(data)
-
+        
+        #Increment the counter of images
+        i += 1
         logging.debug("Processed article: %s", title)
     
     logging.info("Completed processing all news articles.")
