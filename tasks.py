@@ -189,7 +189,7 @@ def minimal_task():
     time.sleep(3)
     
     logging.info("Entering the loop to load more news.")
-    while not browser.is_hidden("//span[text()='Load More']"):
+    while not browser.find_element("//span[text()='Load More']").is_displayed():
         browser.find_element(By.XPATH,"//span[text()='Load More']").click()
         time.sleep(3)
 
