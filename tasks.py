@@ -204,7 +204,7 @@ def minimal_task():
         As we need this is a dynamic value in the page, we rather to use the full Xpath to retrieve the value in the span
 
     """
-    news_amount = int(browser.find_element(By.XPATH,"//div[@class='num-found']/span[2]/span").text())
+    news_amount = int(browser.find_element(By.XPATH,"//div[@class='num-found']/span[2]/span").text)
     logging.info("Amount of news articles found: %d", news_amount)
 
     # Create Excel table
