@@ -134,17 +134,7 @@ def minimal_task():
     current_month_formatted =  f"0{current_month}" if current_month < 10 else str(current_month)
     current_day_formatted =  f"0{current_day}" if current_day < 10 else str(current_day)
 
-    # Init chrome
-    # Config download dir for chrome
-    download_dir = Path(os.environ.get('ROBOT_ARTIFACTS'))
-    chrome_prefs = {
-    "download.default_directory": str(download_dir),
-    "download.prompt_for_download": False,
-    "download.directory_upgrade": True,
-    "safebrowsing.enabled": True
-    }
-
-# Inicializar Chrome con las preferencias configuradas
+    # Init Chrome with the appropiate config to work well with the driver
     logging.info("Configuring browser for automation.")
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -152,7 +142,6 @@ def minimal_task():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--remote-debugging-port=9222")
     chrome_options.add_argument("--user-data-dir=" + str(download_dir))
-    #chrome_options.add_experimental_option("prefs", chrome_prefs)
     browser = webdriver.Chrome(options=chrome_options)
 
     # Retrieve secrets for authentication
