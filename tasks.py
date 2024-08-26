@@ -160,6 +160,14 @@ def minimal_task():
     browser.find_element(By.XPATH,"//input[@type='submit' and @aria-label='submit search' and @class='resp_site_submit']").click()
     time.sleep(5)
 
+    #Before clicking in the news searching output, we review if there is no Alert Banner in the page, if exists then close it
+    try:
+        close_button_element = driver.find_element(By.XPATH, "//div[@class='alert-banner is-breaking ']//a[@class='close']")
+        close_button_element.click()
+        logging.info("there was an alert message")
+    except NoSuchElementException:
+        logging.info("there is no alert message")
+    
     """ Select Date Range (From and To)
     Clicks on each list and selects depending on dates
     """
