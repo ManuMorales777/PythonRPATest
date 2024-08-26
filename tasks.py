@@ -164,7 +164,7 @@ def minimal_task():
     time.sleep(5)
 
     """ Select Date Range (From and To)
-    Clicks on each list and selects depending on dates, also values are converted to 00 string format
+    Clicks on each list and selects depending on dates
     """
     logging.info("Selecting date range for the search.")
     date_min_element = browser.find_element(By.XPATH, "//div[@class='date min']")
@@ -173,7 +173,7 @@ def minimal_task():
     date_min_element.find_element(By.XPATH, ".//div[@class='sub day']").click()
     date_min_element.find_element(By.XPATH, ".//div[@class='sub day']//ul[@name='select']//li[@id='01']").click()
     date_min_element.find_element(By.XPATH, ".//div[@class='sub year']").click()
-    date_min_element.find_element(By.XPATH, ".//div[@class='sub year']//ul[@name='select']//li[@id='2024']").click()
+    date_min_element.find_element(By.XPATH, f".//div[@class='sub year']//ul[@name='select']//li[@id='{start_date.year}']").click()
     time.sleep(1)
     date_max_element = browser.find_element(By.XPATH, "//div[@class='date max']")
     date_max_element.find_element(By.XPATH, ".//div[@class='sub month']").click()
@@ -181,7 +181,7 @@ def minimal_task():
     date_max_element.find_element(By.XPATH, ".//div[@class='sub day']").click()
     date_max_element.find_element(By.XPATH, f".//div[@class='sub day']//ul[@name='select']//li[@id='{current_day_formatted}']").click()
     date_max_element.find_element(By.XPATH, ".//div[@class='sub year']").click()
-    date_max_element.find_element(By.XPATH, f".//div[@class='sub year']//ul[@name='select']//li[@id='{year_index_formatted}']").click()
+    date_max_element.find_element(By.XPATH, f".//div[@class='sub year']//ul[@name='select']//li[@id='{actual_date.year}']").click()
 
     # Start searching
     logging.info("Starting search.")
