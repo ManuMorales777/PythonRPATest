@@ -160,7 +160,7 @@ def minimal_task():
         .send_keys_to_element(text_input, phrase_category_search)\
         .perform()
     
-    browser.find_element(By.XPATH,"//input[@type='submit' and @aria-label='submit search' and @class='resp_site_submit']")
+    browser.find_element(By.XPATH,"//input[@type='submit' and @aria-label='submit search' and @class='resp_site_submit']").click()
     time.sleep(5)
 
     """ Select Date Range (From and To)
