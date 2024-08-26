@@ -266,5 +266,5 @@ def minimal_task():
     excel_creator.save_file()
     logging.info("Excel saved succesfully.")
     # Close the page
-    page.close()
+    browser.close()
     logging.info("RPA task completed.")
