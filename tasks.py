@@ -76,7 +76,7 @@ class FoxNewsSearch:
     def click(self, xpath):
         """Click an element on the page using XPath with the rpa library."""
         logging.debug("Clicking element with XPath: %s", xpath)
-        time.sleep(2)
+        time.sleep(3)
         self.driver.find_element(By.XPATH, xpath).click()
 
     def search(self, keyword):
@@ -189,7 +189,7 @@ def minimal_task():
     page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]") 
     page.click(f"//li[@id='{past_month_formatted}' and @class='{past_month_formatted}' and .='{past_month_formatted}']")
     page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button")
-    page.click("//li[@id='01' and @class='01' and .='01']")
+    page.click("//li[@id='01']")
     page.click("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button")
     page.click("//li[@id='2024']")
     time.sleep(1)
