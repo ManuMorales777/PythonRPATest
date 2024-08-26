@@ -188,13 +188,13 @@ def minimal_task():
     #In this loop we collapse all the articles to retrieve all the info of all news within given days
     logging.info("Entering the loop to load more news.")
     while True:
-        try:
+    try:
         load_more_button = browser.find_element(By.XPATH, "//span[text()='Load More']")
         if not load_more_button.is_displayed():
-        break
+            break
         load_more_button.click()
         time.sleep(3)
-        except Exception as e:
+    except Exception as e:
         logging.error(f"An error occurred: {e}")
         break
 
