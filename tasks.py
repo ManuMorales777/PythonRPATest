@@ -135,13 +135,25 @@ def minimal_task():
     current_day_formatted =  f"0{current_day}" if current_day < 10 else str(current_day)
 
     # Init chrome
+    # Config download dir for chrome
+    download_dir = Path(os.environ.get('ROBOT_ARTIFACTS'))
+    chrome_prefs = {
+    "download.default_directory": download_dir,
+    "download.prompt_for_download": False,
+    "download.directory_upgrade": True,
+    "safebrowsing.enabled": True
+    }
+
+# Inicializar Chrome con las preferencias configuradas
     logging.info("Configuring browser for automation.")
     chrome_options = Options()
-    #chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--remote-debugging-port=9222")
+    chrome_options.add_experimental_option("prefs", chrome_prefs)
     browser = webdriver.Chrome(options=chrome_options)
+
     # Retrieve secrets for authentication
     secrets = vault.get_secret('Rpa_Challenge')
     browser.get(secrets['url'])
