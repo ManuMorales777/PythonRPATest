@@ -157,7 +157,7 @@ def minimal_task():
     text_input = browser.find_element(By.XPATH,"//input[@type='text' and (@aria-label='search foxnews.com' or @placeholder='Search foxnews.com') and @name='q']") 
 
     #Search the input phrase with his category
-    ActionChains(driver)\
+    ActionChains(browser)\
         .send_keys_to_element(text_input, phrase_category_search)\
         .perform()
     
