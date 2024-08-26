@@ -154,9 +154,12 @@ def minimal_task():
 
     # Perform the search on the website
     logging.info("Performing search on the website.")
-    browser.find_element("//div[@class='search-toggle tablet-desktop']/a[@class='js-focus-search']").click()
-    browser.fill("//input[@type='text' and (@aria-label='search foxnews.com' or @placeholder='Search foxnews.com') and @name='q']", phrase_category_search)
-    browser.click("//input[@type='submit' and @aria-label='submit search' and @class='resp_site_submit']")
+    browser.find_element(By.XPATH, "//div[@class='search-toggle tablet-desktop']/a[@class='js-focus-search']").click()
+    text_input = browser.find_element(By.XPATH,"//input[@type='text' and (@aria-label='search foxnews.com' or @placeholder='Search foxnews.com') and @name='q']") 
+    ActionChains(driver)\
+        .send_keys_to_element(text_input, phrase_category_search)\
+        .perform()
+    browser.find_element(By.XPATH,"//input[@type='submit' and @aria-label='submit search' and @class='resp_site_submit']")
     time.sleep(5)
 
     """ Select Date Range (From and To)
