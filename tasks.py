@@ -163,7 +163,7 @@ def minimal_task():
 
     #Before clicking in the news searching output, we review if there is no Alert Banner in the page, if exists then close it
     try:
-        close_button_element = browser.find_element(By.XPATH, "//div[@class='alert-banner is-breaking ']//a[@class='close']")
+        close_button_element = browser.find_element(By.XPATH, "//a[@class='close']")
         close_button_element.click()
         logging.info("there was an alert message")
     except NoSuchElementException:
