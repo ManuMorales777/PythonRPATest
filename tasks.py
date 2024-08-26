@@ -138,7 +138,7 @@ def minimal_task():
     # Config download dir for chrome
     download_dir = Path(os.environ.get('ROBOT_ARTIFACTS'))
     chrome_prefs = {
-    "download.default_directory": download_dir,
+    "download.default_directory": str(download_dir),
     "download.prompt_for_download": False,
     "download.directory_upgrade": True,
     "safebrowsing.enabled": True
