@@ -209,9 +209,7 @@ def minimal_task():
 
     logging.info("Finished loading news.")
 
-    """ Get the number of news articles
-        As we need this is a dynamic value in the page, we rather to use the full Xpath to retrieve the value in the span
-
+    """ Get the number of news articles resulting
     """
     news_amount = int(browser.find_element(By.XPATH,"//div[@class='num-found']/span[2]/span").text)
     logging.info("Amount of news articles found: %d", news_amount)
@@ -224,7 +222,10 @@ def minimal_task():
     
     # Find all articles using XPath
     articles = browser.find_elements(By.XPATH, "//article[@class='article']")
-    i=1
+    
+    # Variable to handle images dynamic names
+    i=1 
+    
     # Loop through each article
     for article in articles:
 
@@ -256,6 +257,7 @@ def minimal_task():
         
         #Increment the counter of images
         i += 1
+        
         logging.debug("Processed article: %s", title)
     
     logging.info("Completed processing all news articles.")
