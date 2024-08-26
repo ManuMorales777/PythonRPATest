@@ -168,28 +168,28 @@ def minimal_task():
     """
     logging.info("Selecting date range for the search.")
     date_min_element = browser.find_element(By.XPATH, "//div[@class='date min']")
-    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]").click()
-    browser.find_element(f"//li[@id='{past_month_formatted}' and @class='{past_month_formatted}' and .='{past_month_formatted}']").click()
-    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button").click()
-    browser.find_element(date_min_element.find_element(By.XPATH, ".//div[@class='sub day']//ul[@name='select']//li[@id='01']")).click()
-    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button").click()
-    browser.find_element("//li[@id='2024']").click()
+    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[1]").click()
+    browser.find_element(By.XPATH,f"//li[@id='{past_month_formatted}' and @class='{past_month_formatted}' and .='{past_month_formatted}']").click()
+    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]/button").click()
+    browser.find_element(By.XPATH,date_min_element.find_element(By.XPATH, ".//div[@class='sub day']//ul[@name='select']//li[@id='01']")).click()
+    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[3]/button").click()
+    browser.find_element(By.XPATH,"//li[@id='2024']").click()
     time.sleep(1)
-    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/button").click()
-    browser.find_element(f"//li[@id='{current_month_formatted}' and @class='{current_month_formatted}' and .='{current_month_formatted}']").click()
-    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/button").click()
-    browser.find_element(f"//li[@id='{current_day_formatted}' and @class='{current_day_formatted}' and .='{current_day_formatted}']").click()
-    browser.find_element("//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/button").click()
-    browser.find_element(f"//li[@id='{year_index_formatted}' and @class='{year_index_formatted}' and .='{year_index_formatted}']").click()
+    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[1]/button").click()
+    browser.find_element(By.XPATH,f"//li[@id='{current_month_formatted}' and @class='{current_month_formatted}' and .='{current_month_formatted}']").click()
+    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/button").click()
+    browser.find_element(By.XPATH,f"//li[@id='{current_day_formatted}' and @class='{current_day_formatted}' and .='{current_day_formatted}']").click()
+    browser.find_element(By.XPATH,"//*[@id='wrapper']/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[3]/button").click()
+    browser.find_element(By.XPATH,f"//li[@id='{year_index_formatted}' and @class='{year_index_formatted}' and .='{year_index_formatted}']").click()
 
     # Start searching
     logging.info("Starting search.")
-    browser.find_element("//div[@class='button']/a[text()='Search']").click()
+    browser.find_element(By.XPATH,"//div[@class='button']/a[text()='Search']").click()
     time.sleep(3)
     
     logging.info("Entering the loop to load more news.")
     while not browser.is_hidden("//span[text()='Load More']"):
-        browser.find_element("//span[text()='Load More']").click()
+        browser.find_element(By.XPATH,"//span[text()='Load More']").click()
         time.sleep(3)
 
     logging.info("Finished loading news.")
@@ -198,7 +198,7 @@ def minimal_task():
         As we need this is a dynamic value in the page, we rather to use the full Xpath to retrieve the value in the span
 
     """
-    news_amount = int(page.inner_text("//div[@class='num-found']/span[2]/span"))
+    news_amount = int(browser.inner_text("//div[@class='num-found']/span[2]/span"))
     logging.info("Amount of news articles found: %d", news_amount)
 
     # Create Excel table
